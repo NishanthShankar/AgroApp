@@ -12,14 +12,13 @@ export default StyleSheet.create({
     height: 104,
     borderRadius: Metrics.borderRadius,
     marginHorizontal: Metrics.marginHorizontal,
-    backgroundColor: Colors.snow,
-    elevation: 4,
     overflow: 'hidden'
   },
   content: {
     flex: 1,
     justifyContent: 'center',
-    padding: 16
+    padding: 16,
+    paddingLeft: 16 + 12
   },
   iconContainer: {
     height: 80,
@@ -29,6 +28,7 @@ export default StyleSheet.create({
     paddingBottom: 2,
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
     marginHorizontal: Metrics.marginHorizontal
   }
 })

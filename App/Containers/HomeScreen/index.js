@@ -41,7 +41,7 @@ class HomeScreen extends Component {
       <View key='container' style={styles.container}>
         <View key='logo' style={{ margin: 24, alignItems: 'center' }}>
           <View style={styles.logoContainer} />
-          <Text style={[Fonts.style.h1, styles.label]}> Agro </Text>
+          {/* <Text style={[Fonts.style.h1, styles.label]}> Agro </Text> */}
         </View>
 
         {actionMap.map(this.renderHomeItem)}
