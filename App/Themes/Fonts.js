@@ -32,7 +32,8 @@ const style = {
   },
   h3: {
     fontFamily: type.emphasis,
-    fontSize: size.h3
+    fontSize: size.h3,
+    lineHeight: size.h3
   },
   h4: {
     fontFamily: type.base,

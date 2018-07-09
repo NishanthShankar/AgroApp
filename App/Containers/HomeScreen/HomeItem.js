@@ -83,7 +83,7 @@ class HomeItem extends Component {
   render () {
     const { id, label, reverse, icon } = this.props
     const flexDirection = reverse ? 'row-reverse' : 'row'
-
+    const color = Colors[id]
     const { flex, bgColor, iconBg, opacity } = this.getProps()
     const { dummy, dummy2, dummy3 } = this.getDummyProps()
     return (
@@ -95,26 +95,26 @@ class HomeItem extends Component {
           style={[styles.card, { backgroundColor: bgColor, flexDirection }]}
         >
           <View style={styles.content}>
-            <Text style={[Fonts.style.h3, { color: Colors[id] }]}>{label}</Text>
+            <Text style={[Fonts.style.h3, { color }]}>{label}</Text>
             <View style={{...StyleSheet.absoluteFillObject, flexDirection}}>
               <Animated.View style={{ flex: dummy2 }} />
-              <Animated.View style={{ flex, backgroundColor: Colors[id] }} />
+              <Animated.View style={{ flex, backgroundColor: color }} />
               <Animated.View style={{ flex: dummy }} />
             </View>
           </View>
         </Animated.View>
-        <View style={[styles.iconContainer, { backgroundColor: Colors.clear }]}>
+        <View style={[styles.iconContainer, { backgroundColor: Colors.snow }]}>
           <View style={{...StyleSheet.absoluteFillObject, flexDirection}} >
             <Animated.View
-              style={{ flex: iconBg, backgroundColor: Colors[id] }}
+              style={{ flex: iconBg, backgroundColor: color }}
             />
             <Animated.View style={{ flex: dummy3 }} />
           </View>
           <View style={{position: 'absolute', opacity: 1}}>
-            <Icon name={icon} size={36} color={Colors[id]} />
+            <Icon name={icon} size={36} color={color} style={styles.icon} />
           </View>
           <Animated.View style={{position: 'absolute', opacity}}>
-            <Icon name={icon} size={36} color={Colors.snow} />
+            <Icon name={icon} size={36} color={'white'} style={styles.icon} />
           </Animated.View>
         </View>
       </Touchable>

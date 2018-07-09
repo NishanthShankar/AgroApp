@@ -1,18 +1,18 @@
 import { StyleSheet } from 'react-native'
-import { Colors, Metrics } from '../../Themes/'
+import { Metrics } from '../../Themes/'
 
 export default StyleSheet.create({
   container: {
-    marginVertical: Metrics.marginHorizontal,
+    flex: 1,
     paddingHorizontal: 4,
-    alignItems: 'center'
+    paddingVertical: 16
   },
   card: {
     flex: 1,
-    height: 104,
     borderRadius: Metrics.borderRadius,
     marginHorizontal: Metrics.marginHorizontal,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    justifyContent: 'center'
   },
   content: {
     flex: 1,
@@ -20,12 +20,14 @@ export default StyleSheet.create({
     padding: 16,
     paddingLeft: 16 + 12
   },
+  icon: {
+    lineHeight: 36
+  },
   iconContainer: {
-    height: 80,
-    width: 80,
-    borderRadius: 40,
-    paddingLeft: 2,
-    paddingBottom: 2,
+    height: 72,
+    width: 72,
+    borderRadius: 36,
+    marginTop: 9,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
