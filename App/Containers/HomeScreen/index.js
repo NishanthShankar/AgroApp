@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Animated } from 'react-native'
+import { View, Text, Animated, BackHandler } from 'react-native'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/SimpleLineIcons'
 
@@ -24,14 +24,34 @@ class HomeScreen extends Component {
 
   layout = {}
 
+  componentDidMount () {
+    BackHandler.addEventListener('hardwareBackPress', this.onBack)
+  }
+
+  componentWillUnmount () {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBack)
+  }
+
   onChoose = id => () => {
-    this.setState({ show: true }, () =>
-      this.setState({ selected: id }, () => {
-        this.state.top.setValue(this.layout[id].top)
-        Animated.timing(this.state.top, { toValue: 0 }).start()
+    this.state.top.setValue(this.layout[id].top)
+    this.currentId = id
+    this.setState({ show: true, anySelected: true }, () =>
+      this.setState({ selected: id }, this.animate(0))
+    )
+  }
+
+  onBack = () => {
+    const top = this.layout[this.currentId].top
+    this.setState(
+      { anySelected: false },
+      this.animate(top, () => {
+        this.setState({ selected: null, show: null })
       })
     )
   }
+
+  animate = (toValue, cb) => _ =>
+    Animated.timing(this.state.top, { toValue }).start(cb)
 
   onLayout = (id, index) => () => {
     this.refs[id] &&
@@ -58,7 +78,7 @@ class HomeScreen extends Component {
   )
 
   renderAnimator = () => {
-    const {selected} = this.state
+    const { selected } = this.state
     if (this.state.show == null) return null
     return (
       <Animated.View
@@ -68,7 +88,11 @@ class HomeScreen extends Component {
           { top: this.state.top }
         ]}
       >
-        <HomeItem {...actionMap[selected]} selected={this.state.show} />
+        <HomeItem
+          {...actionMap[selected]}
+          selected={this.state.anySelected}
+          onBack={this.onBack}
+        />
       </Animated.View>
     )
   }

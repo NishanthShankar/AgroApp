@@ -21,16 +21,24 @@ export default StyleSheet.create({
     paddingLeft: 0
   },
   icon: {
-    lineHeight: 36
+    lineHeight: 32
   },
   iconContainer: {
-    height: 72,
-    width: 72,
-    borderRadius: 36,
+    height: 64,
+    width: 64,
+    borderRadius: 32,
     marginTop: 9,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
     marginHorizontal: Metrics.marginHorizontal
+  },
+  closeIconContainer: {
+    height: 64,
+    borderRadius: 36,
+    marginTop: 9,
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden'
   }
 })
