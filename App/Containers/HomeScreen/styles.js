@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Colors } from '../../Themes/'
+import { Colors } from '@Themes/'
 
 export default StyleSheet.create({
   container: {
@@ -22,5 +22,10 @@ export default StyleSheet.create({
     height: 56,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  animator: {
+    position: 'absolute',
+    opacity: 1,
+    backgroundColor: Colors.background
   }
 })

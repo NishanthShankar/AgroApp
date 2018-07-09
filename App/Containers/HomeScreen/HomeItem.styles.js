@@ -18,7 +18,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 16,
-    paddingLeft: 16 + 12
+    paddingLeft: 0
   },
   icon: {
     lineHeight: 36

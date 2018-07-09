@@ -24,12 +24,16 @@ class HomeItem extends Component {
       selected: false,
       progress: new Animated.Value(0)
     }
+    if (this.props.selected) this.animate()
   }
 
-  onPress = () => {
+  animate = () => {
     // Animate stuff
     const config = {toValue: 1, duration: 1000}
     Animated.timing(this.state.progress, config).start()
+  }
+
+  onPress = () => {
     this.props.onPress && this.props.onPress()
   }
 
