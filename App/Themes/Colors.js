@@ -50,7 +50,6 @@ const flatColors = {
   clouds: '#ecf0f1',
   paper: '#efefef',
   offWhite: '#fcfcfc'
-
 }
 
 const colors = {
