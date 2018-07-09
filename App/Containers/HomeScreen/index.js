@@ -41,11 +41,11 @@ class HomeScreen extends Component {
       <View key='container' style={styles.container}>
         <View key='logo' style={{ margin: 24, alignItems: 'center' }}>
           <View style={styles.logoContainer} />
-          {/* <Text style={[Fonts.style.h1, styles.label]}> Agro </Text> */}
+          <Text style={[Fonts.style.h1, styles.label]}> Agro </Text>
         </View>
-
-        {actionMap.map(this.renderHomeItem)}
-
+        <View style={{flex: 1, marginBottom: 24}}>
+          {actionMap.map(this.renderHomeItem)}
+        </View>
         <View style={styles.topIcon}>
           <Icon name='menu' size={28} color={Colors.snow} />
         </View>

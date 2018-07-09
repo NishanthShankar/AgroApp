@@ -13,6 +13,7 @@ export default StyleSheet.create({
     backgroundColor: Colors.snow
   },
   label: {
+    marginTop: 4,
     color: Colors.snow
   },
   topIcon: {
