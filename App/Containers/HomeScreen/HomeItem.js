@@ -27,7 +27,7 @@ class HomeItem extends Component {
 
     const iconColor = this.props.selected ? Colors.snow : color
     const iconHolder = this.props.selected ? color : Colors.clear
-    const cardColor = this.props.selected ? Colors.clear : Colors.snow
+    const cardColor = this.props.selected ? Colors.red : Colors.snow
 
     const cardStyle = { backgroundColor: cardColor, flexDirection }
 

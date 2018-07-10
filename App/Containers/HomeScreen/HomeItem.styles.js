@@ -5,13 +5,15 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 4,
-    paddingVertical: 16
+    paddingVertical: 16,
+    alignItems: 'center'
   },
   card: {
     flex: 1,
     borderRadius: Metrics.borderRadius,
     marginHorizontal: Metrics.marginHorizontal,
     overflow: 'hidden',
+    alignSelf: 'stretch',
     justifyContent: 'center'
   },
   content: {
@@ -27,7 +29,6 @@ export default StyleSheet.create({
     height: 64,
     width: 64,
     borderRadius: 32,
-    marginTop: 9,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
@@ -37,7 +38,7 @@ export default StyleSheet.create({
     height: 64,
     width: 64,
     borderRadius: 32,
-    marginTop: 9,
+    alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden'

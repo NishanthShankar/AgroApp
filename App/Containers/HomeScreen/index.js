@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, Animated, BackHandler } from 'react-native'
+import { View, Animated, BackHandler } from 'react-native'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/SimpleLineIcons'
 
 // Styles
 import styles from './styles.js'
-import { Colors, Fonts } from '@Themes'
+import { Colors } from '@Themes'
 
 import HomeItem from './HomeItem'
 import HomeItemAnim from './HomeItemAnimated'
@@ -99,7 +99,7 @@ class HomeScreen extends Component {
       <View style={{ flex: 1 }}>
         <View key='logo' style={styles.logo}>
           <View style={styles.logoContainer} />
-          <Text style={[Fonts.style.h1, styles.label]}> Agro </Text>
+          {/* <Text style={[Fonts.style.h1, styles.label]}> Agro </Text> */}
         </View>
         <View style={{ flex: 1, marginBottom: 24 }}>
           {actionMap.map(this.renderHomeItem)}

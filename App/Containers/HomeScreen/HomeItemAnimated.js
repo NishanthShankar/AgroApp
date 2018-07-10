@@ -67,7 +67,7 @@ class HomeItem extends Component {
 
     const bgColor = this.state.progress.interpolate({
       inputRange: [0, 0.45, 0.55],
-      outputRange: ['#ffffff', '#ffffff', Colors.background],
+      outputRange: [Colors.snow, Colors.snow, Colors.background],
       extrapolate: 'clamp'
     })
 
