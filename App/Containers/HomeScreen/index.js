@@ -51,8 +51,8 @@ class HomeScreen extends Component {
     )
   }
 
-  animate = (toValue, cb) => _ =>
-    Animated.timing(this.state.top, { toValue }).start(cb)
+  animate = (toValue, callback) => _ =>
+    Animated.timing(this.state.top, { toValue }).start(callback)
 
   onLayout = (id, index) => () => {
     this.refs[id] &&
@@ -79,16 +79,11 @@ class HomeScreen extends Component {
   )
 
   renderAnimator = () => {
-    const { selected } = this.state
+    const { selected, top } = this.state
+    const style = this.layout[selected]
     if (this.state.show == null) return null
     return (
-      <Animated.View
-        style={[
-          this.layout[selected],
-          styles.animator,
-          { top: this.state.top }
-        ]}
-      >
+      <Animated.View style={[style, styles.animator, { top }]}>
         <HomeItemAnim
           {...actionMap[selected]}
           selected={this.state.anySelected}
@@ -102,7 +97,7 @@ class HomeScreen extends Component {
     if (this.state.selected != null) return null
     return (
       <View style={{ flex: 1 }}>
-        <View key='logo' style={{ margin: 24, alignItems: 'center' }}>
+        <View key='logo' style={styles.logo}>
           <View style={styles.logoContainer} />
           <Text style={[Fonts.style.h1, styles.label]}> Agro </Text>
         </View>

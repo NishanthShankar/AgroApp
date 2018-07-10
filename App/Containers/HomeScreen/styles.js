@@ -6,6 +6,10 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.background
   },
+  logo: {
+    margin: 24,
+    alignItems: 'center'
+  },
   logoContainer: {
     height: 88,
     width: 88,
