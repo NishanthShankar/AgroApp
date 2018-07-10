@@ -68,8 +68,9 @@ class AnimatedHeader extends Component {
     const toValue = this.props.layouts[this.props.selectedId].top
     const toHeightValue = this.props.layouts[this.props.selectedId].height
     Animated.sequence([
+      Animated.timing(this.state.height, {toValue: toHeightValue}),
       Animated.timing(this.state.top, {toValue}),
-      Animated.timing(this.state.height, {toValue: toHeightValue})
+      Animated.delay(200)
     ]).start(
       _ => this.setState({show: false})
     )
@@ -83,8 +84,9 @@ class AnimatedHeader extends Component {
     // const { selected, top } = this.state
     const style = this.props.layouts[this.props.selectedId]
     if (!this.state.show) return null
+    const {top, height} = this.state
     return (
-      <Animated.View style={[style, styles.animator, { top: this.state.top }]}>
+      <Animated.View style={[style, styles.animator, { top, height }]}>
         <HomeItemAnim
           {...this.curentObject}
           onBack={this.onBack}
