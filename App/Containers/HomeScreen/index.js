@@ -8,6 +8,7 @@ import styles from './styles.js'
 import { Colors, Fonts } from '@Themes'
 
 import HomeItem from './HomeItem'
+import HomeItemAnim from './HomeItemAnimated'
 
 const actionMap = [
   { id: 'activities', label: 'Activities', icon: 'note' },
@@ -88,7 +89,7 @@ class HomeScreen extends Component {
           { top: this.state.top }
         ]}
       >
-        <HomeItem
+        <HomeItemAnim
           {...actionMap[selected]}
           selected={this.state.anySelected}
           onBack={this.onBack}

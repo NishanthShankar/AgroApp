@@ -35,7 +35,8 @@ export default StyleSheet.create({
   },
   closeIconContainer: {
     height: 64,
-    borderRadius: 36,
+    width: 64,
+    borderRadius: 32,
     marginTop: 9,
     justifyContent: 'center',
     alignItems: 'center',

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Animated, StyleSheet, UIManager } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons'
@@ -18,98 +18,39 @@ class HomeItem extends Component {
     onPress: PropTypes.func
   }
 
-  static getDerivedStateFromProps (props, state) {
-    if (props.selected !== state.selected) {
-      return { selected: props.selected }
-    } else return null
-  }
-
-  constructor (props) {
-    super(props)
-    console.disableYellowBox = true
-    UIManager.setLayoutAnimationEnabledExperimental &&
-      UIManager.setLayoutAnimationEnabledExperimental(true)
-    this.state = {
-      selected: false,
-      progress: new Animated.Value(0)
-    }
-  }
-
-  componentDidUpdate (prevProps, prevState) {
-    this.animate(this.state.selected)
-  }
-
-  animate = forward => {
-    // Animate stuff
-    if (forward) {
-      const config = { toValue: 1, duration: 1000 }
-      Animated.timing(this.state.progress, config).start()
-      return
-    }
-
-    const config = { toValue: 0, duration: 1000 }
-    Animated.timing(this.state.progress, config).start()
-  }
-
-  onPress = () => {
-    this.props.onPress && this.props.onPress()
-  }
-
-  onClose = () => {
-    this.props.onBack()
-  }
+  shouldComponentUpdate = nextProps =>
+    this.props.selected !== nextProps.selected
 
   getProps = () => {
-    const flex = this.state.progress.interpolate({
-      inputRange: [0, 0.3, 0.8],
-      outputRange: [5, 100, 5]
-    })
+    const flexDirection = this.props.reverse ? 'row-reverse' : 'row'
+    const color = Colors[this.props.id]
 
-    const bgColor = this.state.progress.interpolate({
-      inputRange: [0, 0.45, 0.55],
-      outputRange: ['#ffffff', '#ffffff', Colors.background],
-      extrapolate: 'clamp'
-    })
+    const iconColor = this.props.selected ? Colors.snow : color
+    const iconHolder = this.props.selected ? color : Colors.clear
+    const cardColor = this.props.selected ? Colors.clear : Colors.snow
 
-    const iconBg = this.state.progress.interpolate({
-      inputRange: [0, 0.7, 1],
-      outputRange: [0, 0, 1],
-      extrapolate: 'clamp'
-    })
+    const cardStyle = { backgroundColor: cardColor, flexDirection }
 
-    const opacity = this.state.progress.interpolate({
-      inputRange: [0, 0.9, 1],
-      outputRange: [0, 0, 1],
-      extrapolate: 'clamp'
-    })
-
-    const width = this.state.progress.interpolate({
-      inputRange: [0, 0.7, 1],
-      outputRange: [0, 0, 64],
-      extrapolate: 'clamp'
-    })
-
-    return { flex, bgColor, iconBg, opacity, width }
+    return { iconHolder, iconColor, cardStyle }
   }
 
-  getDummyProps = () => {
-    const dummy = this.state.progress.interpolate({
-      inputRange: [0, 0.4, 1],
-      outputRange: [95, 0, 0]
-    })
+  renderBar = flexDirection => {
+    if (this.props.selected) return null
+    return (
+      <View style={{ ...StyleSheet.absoluteFillObject, flexDirection }}>
+        <View style={{ flex: 5, backgroundColor: Colors[this.props.id] }} />
+        <View style={{ flex: 95 }} />
+      </View>
+    )
+  }
 
-    const dummy2 = this.state.progress.interpolate({
-      inputRange: [0, 0.6, 1],
-      outputRange: [0, 0, 95]
-    })
-
-    const dummy3 = this.state.progress.interpolate({
-      inputRange: [0, 0.7, 1],
-      outputRange: [1, 1, 0],
-      extrapolate: 'clamp'
-    })
-
-    return { dummy, dummy2, dummy3 }
+  renderCloseIcon = () => {
+    if (!this.props.selected) return null
+    return (
+      <Touchable onPress={this.props.onBack} style={styles.closeIconContainer}>
+        <Icon name='close' size={32} color={Colors.snow} style={styles.icon} />
+      </Touchable>
+    )
   }
 
   render () {
@@ -117,52 +58,25 @@ class HomeItem extends Component {
     const flexDirection = reverse ? 'row-reverse' : 'row'
     const color = Colors[id]
 
-    const { flex, bgColor, iconBg, opacity, width } = this.getProps()
-    const { dummy, dummy2, dummy3 } = this.getDummyProps()
+    const { iconHolder, iconColor, cardStyle } = this.getProps()
 
-    const textAlign = 'center'
-
-    // const textStyle = reverse ? { marginRight } : { marginLeft: marginRight }
     return (
       <Touchable
-        onPress={this.onPress}
+        onPress={this.props.onPress}
         style={[styles.container, { flexDirection }]}
       >
-        <Animated.View
-          style={[styles.card, { backgroundColor: bgColor, flexDirection }]}
-        >
-          <Animated.View style={[styles.closeIconContainer, { width }]}>
-            <Touchable onPress={this.onClose}>
-              <Icon
-                name={'close'}
-                size={32}
-                color={Colors.snow}
-                style={styles.icon}
-              />
-            </Touchable>
-          </Animated.View>
+        <View style={[styles.card, cardStyle]}>
+          {this.renderCloseIcon()}
           <View style={styles.content}>
-            <Text style={[Fonts.style.h3, { color, textAlign }]}>
+            <Text style={[Fonts.style.h3, { color, textAlign: 'center' }]}>
               {label}
             </Text>
-            <View style={{ ...StyleSheet.absoluteFillObject, flexDirection }}>
-              <Animated.View style={{ flex: dummy2 }} />
-              <Animated.View style={{ flex, backgroundColor: color }} />
-              <Animated.View style={{ flex: dummy }} />
-            </View>
+            {this.renderBar(flexDirection)}
           </View>
-        </Animated.View>
-        <View style={[styles.iconContainer, { backgroundColor: Colors.snow }]}>
-          <View style={{ ...StyleSheet.absoluteFillObject, flexDirection }}>
-            <Animated.View style={{ flex: iconBg, backgroundColor: color }} />
-            <Animated.View style={{ flex: dummy3 }} />
-          </View>
-          <View style={{ position: 'absolute', opacity: 1 }}>
-            <Icon name={icon} size={32} color={color} style={styles.icon} />
-          </View>
-          <Animated.View style={{ position: 'absolute', opacity }}>
-            <Icon name={icon} size={32} color={'white'} style={styles.icon} />
-          </Animated.View>
+        </View>
+
+        <View style={[styles.iconContainer, { backgroundColor: iconHolder }]}>
+          <Icon name={icon} size={32} color={iconColor} style={styles.icon} />
         </View>
       </Touchable>
     )
