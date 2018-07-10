@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View, Animated, BackHandler } from 'react-native'
+import { View, BackHandler } from 'react-native'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 import Icon from 'react-native-vector-icons/SimpleLineIcons'
 
 // Styles
@@ -8,19 +9,23 @@ import styles from './styles.js'
 import { Colors } from '@Themes'
 
 import HomeItem from './HomeItem'
-import HomeItemAnim from './HomeItemAnimated'
 
-const actionMap = [
-  { id: 'activities', label: 'Activities', icon: 'note' },
-  { id: 'transactions', label: 'Money', icon: 'briefcase', reverse: true },
-  { id: 'people', label: 'People', icon: 'people' }
-]
+import HeaderActions from '@Redux/HeaderRedux'
+
+const actionObject = {
+  activities: { id: 'activities', label: 'Activities', icon: 'note' },
+  transactions: {
+    id: 'transactions',
+    label: 'Money',
+    icon: 'briefcase',
+    reverse: true
+  },
+  people: { id: 'people', label: 'People', icon: 'people' }
+}
 class HomeScreen extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      top: new Animated.Value(500)
-    }
+    console.disableYellowBox = true
   }
 
   layout = {}
@@ -34,75 +39,50 @@ class HomeScreen extends Component {
   }
 
   onChoose = id => () => {
-    this.state.top.setValue(this.layout[id].top)
-    this.currentId = id
-    this.setState({ show: true, anySelected: true }, () =>
-      this.setState({ selected: id }, this.animate(0))
-    )
+    this.props.updateSelected(id)
+    this.props.navigation.navigate('ActivitiesScreen')
   }
 
   onBack = () => {
-    const top = this.layout[this.currentId].top
-    this.setState(
-      { anySelected: false },
-      this.animate(top, () => {
-        this.setState({ selected: null, show: null })
-      })
-    )
+    this.props.hideHeader()
+    this.props.navigation.pop()
   }
 
-  animate = (toValue, callback) => _ =>
-    Animated.timing(this.state.top, { toValue }).start(callback)
-
-  onLayout = (id, index) => () => {
+  onLayout = (id) => () => {
     this.refs[id] &&
       this.refs[id].measure((_, __, w, h, left, top) => {
-        this.layout[index] = {
+        const layout = {
           top,
           left,
           width: w,
           height: h
         }
+        this.layout[id] = layout
+        this.props.updateLayout(id, layout)
       })
   }
 
-  renderHomeItem = (data, i) => (
+  renderHomeItem = (data, id) => (
     <View
-      key={data.id}
-      ref={data.id}
+      key={id}
+      ref={id}
       style={{ flex: 1 }}
-      onLayout={this.onLayout(data.id, i)}
+      onLayout={this.onLayout(id)}
       collapsable
     >
-      <HomeItem {...data} onPress={this.onChoose(i)} />
+      <HomeItem {...data} onPress={this.onChoose(id)} />
     </View>
   )
 
-  renderAnimator = () => {
-    const { selected, top } = this.state
-    const style = this.layout[selected]
-    if (this.state.show == null) return null
+  render () {
     return (
-      <Animated.View style={[style, styles.animator, { top }]}>
-        <HomeItemAnim
-          {...actionMap[selected]}
-          selected={this.state.anySelected}
-          onBack={this.onBack}
-        />
-      </Animated.View>
-    )
-  }
-
-  renderMainContent = () => {
-    if (this.state.selected != null) return null
-    return (
-      <View style={{ flex: 1 }}>
+      <View key='container' style={styles.container}>
         <View key='logo' style={styles.logo}>
           <View style={styles.logoContainer} />
           {/* <Text style={[Fonts.style.h1, styles.label]}> Agro </Text> */}
         </View>
         <View style={{ flex: 1, marginBottom: 24 }}>
-          {actionMap.map(this.renderHomeItem)}
+          {_.map(actionObject, this.renderHomeItem)}
         </View>
         <View style={styles.topIcon}>
           <Icon name='menu' size={28} color={Colors.snow} />
@@ -113,19 +93,16 @@ class HomeScreen extends Component {
       </View>
     )
   }
-
-  render () {
-    return (
-      <View key='container' style={styles.container}>
-        {this.renderMainContent()}
-        {this.renderAnimator()}
-      </View>
-    )
-  }
 }
 
 const mapStateToProps = state => ({})
 
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = dispatch => ({
+  updateLayout: (id, layout) =>
+    dispatch(HeaderActions.headerUpdateLayout(id, layout)),
+  updateSelected: (id) =>
+    dispatch(HeaderActions.headerUpdateSelected(id)),
+  hideHeader: () => dispatch(HeaderActions.headerHide())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)

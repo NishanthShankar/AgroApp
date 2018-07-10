@@ -4,6 +4,7 @@ import ReduxNavigation from '../Navigation/ReduxNavigation'
 import { connect } from 'react-redux'
 import StartupActions from '../Redux/StartupRedux'
 import ReduxPersist from '../Config/ReduxPersist'
+import AnimatedHeader from '../Components/AnimatedHeader/'
 
 // Styles
 import styles from './Styles/RootContainerStyles'
@@ -21,6 +22,7 @@ class RootContainer extends Component {
       <View style={styles.applicationView}>
         <StatusBar barStyle='light-content' />
         <ReduxNavigation />
+        <AnimatedHeader />
       </View>
     )
   }
