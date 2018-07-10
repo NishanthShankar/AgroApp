@@ -43,10 +43,7 @@ class HomeScreen extends Component {
     this.props.navigation.navigate('ActivitiesScreen')
   }
 
-  onBack = () => {
-    this.props.hideHeader()
-    this.props.navigation.pop()
-  }
+  onBack = () => this.props.hideHeader()
 
   onLayout = (id) => () => {
     this.refs[id] &&

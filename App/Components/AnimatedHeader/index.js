@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Animated } from 'react-native'
+import { NavigationActions } from 'react-navigation'
 
 import { connect } from 'react-redux'
 import _ from 'lodash'
@@ -72,7 +73,10 @@ class AnimatedHeader extends Component {
       Animated.timing(this.state.top, {toValue}),
       Animated.delay(200)
     ]).start(
-      _ => this.setState({show: false})
+      _ => {
+        this.props.goBack()
+        this.setState({show: false})
+      }
     )
   }
 
@@ -104,6 +108,7 @@ export default connect(
     show: state.header.show
   }),
   dispatch => ({
-    hide: _ => dispatch(HeaderActions.headerHide())
+    hide: _ => dispatch(HeaderActions.headerHide()),
+    goBack: _ => dispatch(NavigationActions.pop())
   })
 )(AnimatedHeader)
