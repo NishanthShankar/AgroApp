@@ -21,9 +21,9 @@ class BottomCard extends Component {
     this._panResponder = PanResponder.create({
       // Ask to be the responder:
       onStartShouldSetPanResponder: (evt, gestureState) => true,
-      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onStartShouldSetPanResponderCapture: (evt, gestureState) => false,
       onMoveShouldSetPanResponder: (evt, gestureState) => true,
-      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onMoveShouldSetPanResponderCapture: (evt, gestureState) => false,
 
       onPanResponderGrant: (evt, gestureState) => {
         // The gesture has started. Show visual feedback so the user knows
@@ -36,6 +36,7 @@ class BottomCard extends Component {
         if (top > INITIAL_TOP) top = INITIAL_TOP
         this.currentTop = top
         this.state.top.setValue(top)
+        // Optimze
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
@@ -43,7 +44,7 @@ class BottomCard extends Component {
         // responder. This typically means a gesture has succeeded
         this.currentTop = Math.abs(gestureState.dy) < MOVEMENT_DELTA
           ? this.initialTop
-          : this.initialTop === INITIAL_TOP ? FINAL_TOP : INITIAL_TOP
+          : gestureState.dy < 0 ? FINAL_TOP : INITIAL_TOP
         this.initialTop = this.currentTop
         Animated.timing(this.state.top, { toValue: this.currentTop }).start()
       },
@@ -59,6 +60,9 @@ class BottomCard extends Component {
     })
   }
 
+  onPress = () => this.animateUp()
+  animateUp = () => Animated.timing(this.state.top, {toValue: FINAL_TOP}).start()
+
   render () {
     const aHor = this.state.top.interpolate({
       inputRange: [FINAL_TOP, INITIAL_TOP],
@@ -72,6 +76,7 @@ class BottomCard extends Component {
       <AnimatedItem
         aHor={aHor}
         aColor={aColor}
+        onOpen={this.onPress}
         aTop={this.state.top}
         handlers={this._panResponder.panHandlers}
         {...this.props}

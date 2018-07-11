@@ -2,9 +2,9 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 
-// Styles
 import I18n from '@I18n'
 import styles from './styles'
+import {Touchable} from '@Components'
 
 const ActivitiesScreen = props => {
   return (
@@ -19,9 +19,9 @@ const ActivitiesScreen = props => {
         <Text style={styles.allHeading}>
           {I18n.t('allActivites')}
         </Text>
-        <View style={styles.listCard} >
+        <Touchable onPress={props.onOpen} style={styles.listCard} >
           {props.children}
-        </View>
+        </Touchable>
       </View>
       <View
         pointerEvents='none'
