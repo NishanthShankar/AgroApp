@@ -10,8 +10,8 @@ export default StyleSheet.create({
   allHeading: {
     ...Fonts.style.h4,
     color: Colors.snow,
-    marginBottom: 12,
-    marginTop: 8,
+    marginBottom: 16,
+    marginTop: 16,
     marginLeft: 8
   },
   cardContainer: {
@@ -22,6 +22,7 @@ export default StyleSheet.create({
   listCard: {
     elevation: 5,
     borderRadius: 16,
+    marginBottom: 24,
     backgroundColor: Colors.snow,
     overflow: 'hidden'
   }

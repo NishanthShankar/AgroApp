@@ -1,28 +1,14 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 
 import I18n from '@I18n'
 import styles from './styles'
-import {Touchable} from '@Components'
+import { Touchable } from '@Components'
 
 const ActivitiesScreen = props => {
   return (
     <View pointerEvents='box-none' style={StyleSheet.absoluteFill}>
-      <View
-        {...props.handlers}
-        style={[
-          styles.cardContainer,
-          { top: props.aTop, left: props.aHor, right: props.aHor }
-        ]}
-      >
-        <Text style={styles.allHeading}>
-          {I18n.t('allActivites')}
-        </Text>
-        <Touchable onPress={props.onOpen} style={styles.listCard} >
-          {props.children}
-        </Touchable>
-      </View>
       <View
         pointerEvents='none'
         style={{
@@ -31,6 +17,22 @@ const ActivitiesScreen = props => {
           backgroundColor: props.aColor
         }}
       />
+      <View
+        {...props.handlers}
+        style={[
+          styles.cardContainer,
+          { top: props.aTop, left: props.aHor, right: props.aHor, bottom: 0 }
+        ]}
+      >
+        <Text style={styles.allHeading}>
+          {I18n.t('allActivites')}
+        </Text>
+        <ScrollView style={{flex: 1}} scrollEnabled={props.scroll} >
+          <Touchable onPress={props.onOpen} style={styles.listCard}>
+            {props.children}
+          </Touchable>
+        </ScrollView>
+      </View>
     </View>
   )
 }
