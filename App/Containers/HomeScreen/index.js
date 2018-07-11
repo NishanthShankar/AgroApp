@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { View, BackHandler } from 'react-native'
+import { View, BackHandler, Text } from 'react-native'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import Icon from 'react-native-vector-icons/SimpleLineIcons'
 
 // Styles
 import styles from './styles.js'
-import { Colors } from '@Themes'
+import { Colors, Fonts } from '@Themes'
 
 import HomeItem from './HomeItem'
 
@@ -16,7 +16,7 @@ const actionObject = {
   activities: { id: 'activities', label: 'Activities', icon: 'note' },
   transactions: {
     id: 'transactions',
-    label: 'Money',
+    label: 'Transactions',
     icon: 'briefcase',
     reverse: true
   },
@@ -76,7 +76,7 @@ class HomeScreen extends Component {
       <View key='container' style={styles.container}>
         <View key='logo' style={styles.logo}>
           <View style={styles.logoContainer} />
-          {/* <Text style={[Fonts.style.h1, styles.label]}> Agro </Text> */}
+          <Text style={[Fonts.style.h1, styles.label]}> Agro </Text>
         </View>
         <View style={{ flex: 1, marginBottom: 24 }}>
           {_.map(actionObject, this.renderHomeItem)}

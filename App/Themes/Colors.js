@@ -55,6 +55,8 @@ const flatColors = {
 const colors = {
   background: '#34495e',
   backgroundAccent: '#2c3e50',
+
+  primary: flatColors.turqoise,
   activities: flatColors.cyan,
   people: flatColors.carrot,
   transactions: flatColors.emerald,

@@ -16,13 +16,13 @@ const PrimaryNav = StackNavigator({
 }, {
   // Default config for all screens
   headerMode: 'none',
-  initialRouteName: 'HomeScreen',
+  initialRouteName: 'ActivitiesScreen',
   navigationOptions: {
     headerStyle: styles.header
   },
   transitionConfig: () => ({
     transitionSpec: {
-      duration: 0,
+      duration: 400,
       timing: Animated.timing,
       easing: Easing.step0
     }

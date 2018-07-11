@@ -8,18 +8,13 @@ import HomeItemAnim from './HomeItemAnimated'
 import styles from './HomeItem.styles'
 
 import HeaderActions from '@Redux/HeaderRedux'
-
-// const actionMap = [
-//   { id: 'activities', label: 'Activities', icon: 'note' },
-//   { id: 'transactions', label: 'Money', icon: 'briefcase', reverse: true },
-//   { id: 'people', label: 'People', icon: 'people' }
-// ]
+import {Metrics} from '@Themes'
 
 const actionObject = {
   activities: { id: 'activities', label: 'Activities', icon: 'note' },
   transactions: {
     id: 'transactions',
-    label: 'Money',
+    label: 'Transactions',
     icon: 'briefcase',
     reverse: true
   },
@@ -59,7 +54,7 @@ class AnimatedHeader extends Component {
     this.setState({ show: true }, _ =>
       Animated.sequence([
         Animated.timing(this.state.top, { toValue: 0 }),
-        Animated.timing(this.state.height, {toValue: 88})
+        Animated.timing(this.state.height, {toValue: Metrics.headerHeight})
       ]).start()
     )
   }
