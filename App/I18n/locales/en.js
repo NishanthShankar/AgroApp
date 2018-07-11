@@ -1,3 +1,5 @@
 export default {
-  allActivites: 'All Activities'
+  allActivites: 'All Activities',
+  chooseOption: 'Choose Option',
+  showMore: 'Show More'
 }

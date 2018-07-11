@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native'
-import { Colors } from '@Themes/'
+import { Colors, Metrics, Fonts } from '@Themes/'
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.snow,
     zIndex: 2,
-    margin: 24,
+    margin: Metrics.actionCardMargin,
     borderRadius: 16,
     overflow: 'hidden'
   },
@@ -20,8 +20,14 @@ export default StyleSheet.create({
   },
   buttonContainer: {
     height: 56,
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: Colors.primary,
     borderRadius: 16,
     margin: 12
+  },
+  buttonText: {
+    ...Fonts.style.h4,
+    color: Colors.snow
   }
 })

@@ -8,6 +8,7 @@ const metrics = {
   marginVertical: 16,
   borderRadius: 16,
   headerHeight: 88,
+  actionCardMargin: 24,
   // Inbuilt
   section: 25,
   baseMargin: 10,

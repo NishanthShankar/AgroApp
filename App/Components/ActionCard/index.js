@@ -1,39 +1,29 @@
 import React, { Component } from 'react'
 import { View, ViewPagerAndroid, Text } from 'react-native'
-import { Fonts } from '@Themes'
-import { ApplicationStyles } from '../../Themes'
+
+import { Fonts, ApplicationStyles } from '@Themes'
+import { Touchable } from '@Components'
 import styles from './styles'
 
 class ActionCard extends Component {
-  constructor (props) {
-    super(props)
-    this.state = { setPage: 0 }
-  }
-  componentDidMount () {
-    // this.setState({ setPage: 1 })
-    setTimeout(() => {
-      this.refs.vpa && this.refs.vpa.setPage(1)
-    }, 1000)
-  }
+  setPage = (number) => this.refs.vpa && this.refs.vpa.setPage(number)
+
   render () {
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-          <Text style={Fonts.style.h4}>Heading</Text>
+          <Text style={Fonts.style.h4}>{this.props.heading}</Text>
         </View>
         <ViewPagerAndroid
           ref='vpa'
           style={ApplicationStyles.flex}
           scrollEnabled={false}
-          setPage={this.state.setPage}
         >
-          <View style={ApplicationStyles.flex} key='1'>
-            <View style={{}} />
-          </View>
-          <View style={ApplicationStyles.flex} key='2' />
-          <View style={ApplicationStyles.flex} key='3' />
+          {this.props.children}
         </ViewPagerAndroid>
-        <View style={styles.buttonContainer} />
+        <Touchable onPress={this.props.onPress} style={styles.buttonContainer} >
+          <Text style={styles.buttonText}>{this.props.actionText}</Text>
+        </Touchable>
       </View>
     )
   }

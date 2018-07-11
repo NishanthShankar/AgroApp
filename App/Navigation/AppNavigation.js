@@ -16,7 +16,7 @@ const PrimaryNav = StackNavigator({
 }, {
   // Default config for all screens
   headerMode: 'none',
-  initialRouteName: 'HomeScreen',
+  initialRouteName: 'ActivitiesScreen',
   navigationOptions: {
     headerStyle: styles.header
   },
