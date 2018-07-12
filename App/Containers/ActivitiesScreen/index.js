@@ -23,6 +23,7 @@ const Option = props => {
 }
 
 const options = ['Option1', 'Option2', 'Option3', 'Option4']
+const options2 = ['Option12', 'Option23', 'Option34', 'Option41']
 class ActivitiesScreen extends Component {
   constructor (props) {
     super(props)
@@ -53,7 +54,7 @@ class ActivitiesScreen extends Component {
           </View>
           <View style={{ flex: 1, flexDirection: 'row', backgroundColor: 'green' }}>
             <ScrollView horizontal contentContainerStyle={styles.optionHolder}>
-              {options.map(label => <Option label={label} />)}
+              {options2.map(label => <Option label={label} />)}
             </ScrollView>
           </View>
         </ActionCard>
