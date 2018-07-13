@@ -6,7 +6,7 @@ import { Touchable } from '@Components'
 import styles from './styles'
 
 class ActionCard extends Component {
-  setPage = (number) => this.refs.vpa && this.refs.vpa.setPage(number)
+  setPage = number => this.refs.vpa && this.refs.vpa.setPage(number)
 
   render () {
     return (
@@ -21,9 +21,14 @@ class ActionCard extends Component {
         >
           {this.props.children}
         </ViewPagerAndroid>
-        <Touchable onPress={this.props.onPress} style={styles.buttonContainer} >
-          <Text style={styles.buttonText}>{this.props.actionText}</Text>
-        </Touchable>
+        {!this.props.actionText
+          ? null
+          : <Touchable
+            onPress={this.props.onPress}
+            style={styles.buttonContainer}
+            >
+            <Text style={styles.buttonText}>{this.props.actionText}</Text>
+          </Touchable>}
       </View>
     )
   }

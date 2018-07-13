@@ -7,8 +7,7 @@ export default StyleSheet.create({
     backgroundColor: Colors.snow,
     zIndex: 2,
     margin: Metrics.actionCardMargin,
-    borderRadius: 16,
-    overflow: 'hidden'
+    borderRadius: 16
   },
   headerContainer: {
     height: 56,

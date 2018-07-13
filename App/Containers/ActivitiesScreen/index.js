@@ -8,20 +8,11 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 
-// Styles
 import { ActionCard, BottomCard } from '@Components'
+import OptionItem from '@Components/OptionItem/'
 import I18n from '@I18n'
 import { Fonts } from '@Themes'
 import styles from './styles'
-
-const Option = props => {
-  return (
-    <View key={props.label} style={styles.optionHolder}>
-      <View style={styles.option} />
-      <Text style={styles.optionLabel}>{props.label}</Text>
-    </View>
-  )
-}
 
 const options = ['Option1', 'Option2', 'Option3', 'Option4']
 const options2 = ['Option12', 'Option23', 'Option34', 'Option41']
@@ -50,12 +41,12 @@ class ActivitiesScreen extends Component {
         >
           <View style={{ flex: 1, flexDirection: 'row' }}>
             <ScrollView horizontal contentContainerStyle={styles.optionHolder}>
-              {options.map(label => <Option label={label} />)}
+              {options.map(label => <OptionItem label={label} />)}
             </ScrollView>
           </View>
           <View style={{ flex: 1, flexDirection: 'row', backgroundColor: 'green' }}>
             <ScrollView horizontal contentContainerStyle={styles.optionHolder}>
-              {options2.map(label => <Option label={label} />)}
+              {options2.map(label => <OptionItem label={label} />)}
             </ScrollView>
           </View>
         </ActionCard>
