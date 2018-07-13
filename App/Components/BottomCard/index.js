@@ -6,7 +6,7 @@ import { Metrics, Colors } from '@Themes'
 import ActivitiesScreen from './main'
 const AnimatedItem = Animated.createAnimatedComponent(ActivitiesScreen)
 
-const FINAL_TOP = 80
+const FINAL_TOP = 0
 const INITIAL_TOP = Metrics.screenHeight - Metrics.navBarHeight - 44 - 54
 const MOVEMENT_DELTA = 100
 

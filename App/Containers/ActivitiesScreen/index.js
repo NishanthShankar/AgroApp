@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 // Styles
 import { ActionCard, BottomCard } from '@Components'
 import I18n from '@I18n'
+import { Fonts } from '@Themes'
 import styles from './styles'
 
 const Option = props => {
@@ -63,10 +64,10 @@ class ActivitiesScreen extends Component {
           ? null
           : <BottomCard>
             <View style={{ flex: 1, padding: 24 }}>
-              <Text>JELLO</Text>
-              <Text>JELLO</Text>
-              <Text>JELLO</Text>
-              <Text>JELLO</Text>
+              <Text style={[Fonts.style.h5, {marginVertical: 4}]}>ENTRY 1</Text>
+              <Text style={[Fonts.style.h5, {marginVertical: 4}]}>ENTRY 2</Text>
+              <Text style={[Fonts.style.h5, {marginVertical: 4}]}>ENTRY 3</Text>
+              <Text style={[Fonts.style.h5, {marginVertical: 4}]}>ENTRY 4</Text>
             </View>
           </BottomCard>}
       </View>
