@@ -76,7 +76,7 @@ class HomeScreen extends Component {
       <View key='container' style={styles.container}>
         <View key='logo' style={styles.logo}>
           <View style={styles.logoContainer} />
-          <Text style={[Fonts.style.h1, styles.label]}> Agro </Text>
+          {/* <Text style={[Fonts.style.h1, styles.label]}> Agro </Text> */}
         </View>
         <View style={{ flex: 1, marginBottom: 24 }}>
           {_.map(actionObject, this.renderHomeItem)}
